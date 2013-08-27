@@ -1,0 +1,18 @@
+<html>
+  <head>
+    <title>Google Site search</title>
+  </head>
+  <body>
+    <form action="https://www.google.com/search" method="get">
+      <input name="q" type="text">
+      <input type="submit">
+    </form>
+    <hr>
+
+    <form action="/sitesearch/add/" method="post">
+      Label: <input type="text"><br>
+      URL: <input type="text"><br>
+      <input type="submit">
+      {% csrf_token %}
+  </body>
+</html>

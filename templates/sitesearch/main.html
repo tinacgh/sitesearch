@@ -1,0 +1,49 @@
+<html>
+  <head>
+    <title>Google Site search</title>
+  </head>
+  <body>
+    <form action="https://www.google.com/search" method="get" target="_blank">
+      Google search: <input name="q" type="text" size="80" id="q">
+      <input type="submit">
+      <input type="reset">
+    </form>
+
+    {% for site in sites %}
+    <button onclick="setsite('{{ site.url }}')">{{ site.tag }}</button>
+    {% endfor %}
+    <hr>
+
+    <form action="/sitesearch/add/" method="post">
+      <table border="0">
+        <tr>
+          <td colspan="2">
+            <b>Add new site</b>
+          </td>
+        </tr>
+        <tr>
+          <td>Label:</td><td><input type="text" name="tag"></td>
+        </tr>
+        <tr>
+          <td>URL:</td><td><input type="text" name="url"></td>
+        </tr>
+      </table>
+      <input type="submit" value="Add site">
+      <input type="reset">
+      {% csrf_token %}
+    </form>
+    <hr>
+
+    <b>Delete site</b><br>
+    {% for site in sites %}
+    <a href="/sitesearch/{{ site.id }}/delete/">{{ site.tag }}</a><br>
+    {% endfor %}
+    
+    <script type="text/javascript">
+      function setsite(url) {
+        document.getElementById("q").value = "site:" + url + " ";
+        document.getElementById("q").focus();
+      }
+    </script>    
+  </body>
+</html>
